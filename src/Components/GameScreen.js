@@ -8,7 +8,7 @@ const GameScreen = () => {
     const [betAmount, setBetAmount] = useState('');
     const [outcome, setOutcome] = useState('heads');
     const [result, setResult] = useState('');
-    const [isWin, setIsWin] = useState(true); // Track if the user won or lost
+    const [isWin, setIsWin] = useState(true); // to track if the user  won or not
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
@@ -30,47 +30,40 @@ const GameScreen = () => {
 
         const betAmountInEther = parseFloat(betAmount);
 
-        // Check if bet amount is greater than the current balance
         if (betAmountInEther > parseFloat(balance)) {
             setErrorMessage('Bet amount exceeds your current ETH balance!');
             return;
         }
 
-        // Reset the error message if everything is fine
         setErrorMessage('');
 
         try {
-            // Set up ethers.js provider and signer
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
 
-            // Simulate coin flip
             const flipResult = Math.random() > 0.5 ? 'heads' : 'tails';
             const userWon = flipResult === outcome;
 
             if (userWon) {
-                // User won, send double the bet amount back
                 const transactionResponse = await signer.sendTransaction({
-                    to: account, // Send ETH back to the user
-                    value: ethers.utils.parseEther((betAmountInEther * 2).toString()) // Double the amount
+                    to: account,
+                    value: ethers.utils.parseEther((betAmountInEther * 2).toString())
                 });
-                await transactionResponse.wait(); // Wait for the transaction to be confirmed
+                await transactionResponse.wait();
 
                 setIsWin(true);
                 setResult(`You won! It was ${flipResult}.`);
             } else {
-                // User lost, send bet amount to the contract (or owner's address)
                 const transactionResponse = await signer.sendTransaction({
-                    to: "0xYourContractOrOwnerAddressHere", // The contract or owner address
-                    value: ethers.utils.parseEther(betAmountInEther.toString()) // Deduct the bet amount
+                    to: "0xYourContractOrOwnerAddressHere",
+                    value: ethers.utils.parseEther(betAmountInEther.toString())
                 });
-                await transactionResponse.wait(); // Wait for the transaction to be confirmed
+                await transactionResponse.wait();
 
                 setIsWin(false);
                 setResult(`You lost! It was ${flipResult}.`);
             }
 
-            // Update balance after the transaction
             const updatedBalance = await provider.getBalance(account);
             setBalance(ethers.utils.formatEther(updatedBalance));
 
@@ -82,7 +75,6 @@ const GameScreen = () => {
 
     return (
         <div>
-            {/* Inline CSS inside <style> tag */}
             <style>
                 {`
                     .hover-effect {
@@ -140,7 +132,6 @@ const GameScreen = () => {
                         <h1 className="title is-1">Flip Game</h1>
                         <p>Click on Flip Button, to test your luck. If you win, your ETH doubles.</p>
 
-                        {/* ETH Balance Display */}
                         <div className="box eth-balance-box">
                             <p className="has-text-weight-bold is-size-4">Current ETH Balance:</p>
                             <p className="has-text-weight-bold is-size-2">{balance ? `${balance} ETH` : 'Loading...'}</p>
@@ -173,7 +164,6 @@ const GameScreen = () => {
                                     <p className="has-text-danger has-text-weight-bold">{errorMessage}</p>
                                 )}
 
-                                {/* Styled Result with Win/Loss Color and Centered */}
                                 {result && (
                                     <div className="panel-block center-block">
                                         <p className={`result ${isWin ? 'win' : 'lose'}`}>{result}</p>
