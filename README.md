@@ -8,9 +8,8 @@
 - Make the UI/UX design nice.
 - You should test the side before submitting, and it should work. I should be able to test and it should give me tokens back.
 
-## Deploy locally using Ganache:
+## Using Ganache:
+- Worked well locally, but can't be deployed. Major issue.
 
 ## Deploy globally using Faucet:
-Tried two different approaches to get fake tokens from faucet:
-1. 
-2. You need some token in main-net to get test tokens from Alchemy, which I didn't have.
+- Tried getting `Goerli`, `Linea` and `Sepolia` test ETH from various faucets, but each one of them asked for some activity on `mainnet` or some `ETH` which I didn't have.
