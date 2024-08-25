@@ -54,12 +54,6 @@ const GameScreen = () => {
                 setIsWin(true);
                 setResult(`You won! It was ${flipResult}.`);
             } else {
-                const transactionResponse = await signer.sendTransaction({
-                    to: "0xYourContractOrOwnerAddressHere",
-                    value: ethers.utils.parseEther(betAmountInEther.toString())
-                });
-                await transactionResponse.wait();
-
                 setIsWin(false);
                 setResult(`You lost! It was ${flipResult}.`);
             }

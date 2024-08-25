@@ -7,3 +7,10 @@
 - If it lands on the side they have choosen, they get double their tokens back, if it's the wrong side, they get nothing.
 - Make the UI/UX design nice.
 - You should test the side before submitting, and it should work. I should be able to test and it should give me tokens back.
+
+## Deploy locally using Ganache:
+
+## Deploy globally using Faucet:
+Tried two different approaches to get fake tokens from faucet:
+1. 
+2. You need some token in main-net to get test tokens from Alchemy, which I didn't have.
