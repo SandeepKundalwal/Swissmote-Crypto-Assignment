@@ -1,9 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
 
-// Create Context
 const WalletContext = createContext();
 
-// Create a Provider Component
 export const WalletProvider = ({ children }) => {
   const [account, setAccount] = useState(null);
 
@@ -14,7 +12,6 @@ export const WalletProvider = ({ children }) => {
   );
 };
 
-// Custom Hook for using Wallet Context
 export const useWallet = () => {
   return useContext(WalletContext);
 };

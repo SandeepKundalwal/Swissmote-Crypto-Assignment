@@ -13,9 +13,9 @@ function App() {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
         const accounts = await window.ethereum.request({ method: 'eth_accounts' });
         const account = accounts[0];
-        setAccount(account); // Store the account information in context
+        setAccount(account);
         // console.log(account);
-        navigate('/game-screen'); // Navigate to GameScreen
+        navigate('/game-screen');
       } catch (error) {
         console.error('Error connecting wallet:', error);
       }
